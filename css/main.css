@@ -29,6 +29,76 @@ canvas {
   display: block;
 }
 
+.loading.open {
+  opacity: 1;
+  z-index: 6;
+}
+
+.loading {
+  background-color: #8a9dc5;
+  opacity: 0;
+  z-index: -5;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading h1 {
+  font-family: alda, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3em;
+}
+
+.loading-anim {
+  width: 50vw;
+  height: 50vw;
+  position: relative;
+}
+
+.loading-anim .planet {
+  width: 30%;
+  height: 30%;
+  position: absolute;
+  left: calc(50% - 15%);
+  top: calc(50% - 15%);
+}
+
+.loading.loading-anim .orbit {
+  animation: none;
+}
+
+.loading.open .loading-anim .orbit {
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  animation: rotation 5s infinite linear;
+  left: calc(50% - 30%);
+  top: calc(50% - 30%);
+}
+
+.loading.open .loading-anim .orbit:last-of-type {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  animation: rotation 5s infinite linear reverse;
+  left: calc(50% - 45%);
+  top: calc(50% - 45%);
+}
+
+.loading.open .cls-2,
+.loading.open .cls-3 {
+  fill: #8a9dc5;
+}
+
 .info-icon {
   position: absolute;
   width: 10vw;
@@ -184,5 +254,14 @@ canvas {
   .info-container h1 {
     max-width: 80vw;
     font-size: 4.5em;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
   }
 }
