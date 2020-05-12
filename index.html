@@ -92,20 +92,71 @@
     </div>
 
     <script src="./scripts/open-info.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDaCAP3K40UE90sPHBJ4X-3n3aeUOVMFCY",
+        authDomain: "celestial-poem.firebaseapp.com",
+        databaseURL: "https://celestial-poem.firebaseio.com",
+        projectId: "celestial-poem",
+        storageBucket: "celestial-poem.appspot.com",
+        messagingSenderId: "240776602288",
+        appId: "1:240776602288:web:575408a9a95f6cc22b9175",
+        measurementId: "G-CZGDTY4088",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const db = firebase.firestore();
+    </script>
+
     <script src="js/three.js"></script>
     <!-- <script src="js/controls/DeviceOrientationControls.js"></script> -->
     <script src="./js/controls/OrbitControls.js"></script>
     <script>
-      var camera, scene, renderer, controls;
+      let camera, scene, renderer, controls;
+      let poems = [];
       var mouse = new THREE.Vector2(),
         INTERSECTED;
-      window.onload = function () {
-        init();
-        animate();
-      };
+      // window.onload = function () {
+      //   init();
+      //   animate();
+      // };
+      db.collection("poems")
+        .orderBy("clicks")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            poems.push(doc.data());
+          });
+          init();
+          animate();
+        });
+      // db.collection("poems").onSnapshot((snapshot) => {
+      //   let changes = snapshot.docChanges();
+      //   changes.forEach((change) => {
+      //     if (change.type == "added") {
+      //       poems.push(change.doc);
+      //     }
+      //   });
+      // });
+      // init();
+      // animate();
 
       function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
+      }
+
+      function normalize(val, max, min) {
+        return (val - min) / (max - min);
       }
 
       function init() {
@@ -134,12 +185,60 @@
         var planetGeom = new THREE.IcosahedronGeometry(7, 1);
         var orbitalGeom = new THREE.IcosahedronGeometry(15, 1);
 
-        // Stars positioning
-        // for loop for number of stars, change to be number of poems in db.
-        for (var i = 0; i < 800; i++) {
+        // // Stars positioning
+        // // for loop for number of stars, change to be number of poems in db.
+        // for (var i = 0; i < 800; i++) {
+        //   const color = new THREE.Color(1, Math.random(), Math.random());
+        //   var mesh = new THREE.Mesh(starGeom, starMaterial);
+        //   let scaleVal = getRandomArbitrary(0.5, 3.0);
+
+        //   //Material Mesh Init
+        //   // MeshPhongMaterial
+        //   var starMaterial = new THREE.MeshLambertMaterial({
+        //     color: 0xffffff,
+        //     emissive: color,
+        //     flatShading: true,
+        //     emissiveIntensity: 0.4,
+        //     // emissiveIntensity: Math.random(),
+        //     // vertexColors: true,
+        //   });
+
+        //   // Set position of mesh on xyz planes between -0.5 and 0.5
+        //   mesh.position
+        //     .set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5)
+        //     .normalize();
+
+        //   // set position scale of mesh by multiplying just defined position by a scalar
+        //   // scalar calculated as 300 + random float between 0 and 1 * scale value
+        //   // 300 represents the deadzone where no stars will spawn. as planet radius is 7*25= 175, no stars should spawn before at least 175. 300 is stylistic
+        //   mesh.position.multiplyScalar(300 + Math.random() * 600);
+        //   mesh.rotation.set(
+        //     Math.random() * 2,
+        //     Math.random() * 2,
+        //     Math.random() * 2
+        //   );
+        //   // Set size of mesh by adjusting the mesh's scale by a random number between 0.5 and 3
+        //   mesh.scale.set(scaleVal, scaleVal, scaleVal);
+
+        //   // Add Mesh to 3js Object3D object
+        //   particle.add(mesh);
+        // }
+
+        // Create a star for each poem
+        poems.forEach((star) => {
           const color = new THREE.Color(1, Math.random(), Math.random());
-          var mesh = new THREE.Mesh(starGeom, starMaterial);
-          let scaleVal = getRandomArbitrary(0.5, 3.0);
+          // Set scale based on number of clicks for the poem, between 1 and 4
+          let scaleVal =
+            normalize(
+              star.clicks,
+              poems[poems.length - 1].clicks,
+              poems[0].clicks
+            ) *
+              5 +
+            2;
+          console.log("Scaled Value = " + scaleVal);
+
+          // let scaleVal = getRandomArbitrary(0.5, 3.0);
 
           //Material Mesh Init
           // MeshPhongMaterial
@@ -152,6 +251,8 @@
             // vertexColors: true,
           });
 
+          var mesh = new THREE.Mesh(starGeom, starMaterial);
+
           // Set position of mesh on xyz planes between -0.5 and 0.5
           mesh.position
             .set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5)
@@ -160,7 +261,7 @@
           // set position scale of mesh by multiplying just defined position by a scalar
           // scalar calculated as 300 + random float between 0 and 1 * scale value
           // 300 represents the deadzone where no stars will spawn. as planet radius is 7*25= 175, no stars should spawn before at least 175. 300 is stylistic
-          mesh.position.multiplyScalar(300 + Math.random() * 600);
+          mesh.position.multiplyScalar(300 + Math.random() * 100);
           mesh.rotation.set(
             Math.random() * 2,
             Math.random() * 2,
@@ -171,17 +272,11 @@
 
           // Add Mesh to 3js Object3D object
           particle.add(mesh);
-        }
+        });
 
         var planetMaterial = new THREE.MeshPhongMaterial({
           color: 0x00dbe3,
           flatShading: true,
-        });
-
-        var orbitalMaterial = new THREE.MeshPhongMaterial({
-          color: 0xffffff,
-          wireframe: true,
-          // side: THREE.DoubleSide,
         });
 
         // Planet Geometry
@@ -261,6 +356,7 @@
         // );
 
         controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enablePan = false;
         // Prevent dollying into the planet or outside the render distance for the planet
         controls.minDistance = 300;
         controls.maxDistance = 1000;
