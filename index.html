@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content"width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Celestial Poetry</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rhq0hoi.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <div class="info-icon closed">
+      <svg
+        class="i-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"
+        />
+      </svg>
+
+      <svg
+        class="x-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z"
+        />
+      </svg>
+    </div>
+    <div class="info-container">
+      <h1>
+        Celestial Poetry
+      </h1>
+      <p>
+        Conceived during the Coronavirus quarantine in 2020 and inspired by
+        <span class="bold"
+          ><a target="_blank" rel="noopener" href="https://paperplanes.world"
+            >paperplanes</a
+          ></span
+        >, we wanted to show that people can still connect and influence each
+        other despite us being socially distant. In this case through the
+        artform of poetry.
+      </p>
+      <p>
+        This project depicts a planet with hundreds of stars in its' orbit. Each
+        star represents a poem submitted by an anonymous user. A visitor to this
+        system can use their desktop device to see the contributions from afar,
+        but also navigate to this system on their phones to read and submit
+        individual stars using gestures.
+      </p>
+      <p>
+        This was a chance for us to create something artistic using
+        <span class="bold"
+          ><a target="_blank" rel="noopener" href="https://threejs.org"
+            >three.js</a
+          ></span
+        >
+        - a 3D JavaScript framework and Google's
+        <span class="bold">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://firebase.google.com/products"
+            >Cloud Firestore</a
+          >
+        </span>
+        - a new realtime database system, new technologies to us during our time
+        unable to work in our professional careers.
+      </p>
+      <p>
+        Project conceived and created by
+        <span class="bold">
+          <a target="_blank" rel="noopener" href="https://mattpenlington.co.uk"
+            >Matt Penlington</a
+          >
+        </span>
+        and
+        <span class="bold">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://github.com/SamKennard1"
+            >Sam Kennard</a
+          ></span
+        >
+        .
+      </p>
+    </div>
+
+    <script src="./scripts/open-info.js"></script>
+    <script src="js/three.js"></script>
+    <!-- <script src="js/controls/DeviceOrientationControls.js"></script> -->
+    <script src="./js/controls/OrbitControls.js"></script>
+    <script>
+      var camera, scene, renderer, controls;
+      var mouse = new THREE.Vector2(),
+        INTERSECTED;
+      window.onload = function () {
+        init();
+        animate();
+      };
+
+      function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function init() {
+        // init scene
+        scene = new THREE.Scene();
+
+        // init and setup camera
+        camera = new THREE.PerspectiveCamera(
+          100,
+          window.innerWidth / window.innerHeight,
+          1,
+          1200
+        );
+        camera.position.z = 500;
+        scene.add(camera);
+
+        // init shapes
+        circle = new THREE.Object3D();
+        particle = new THREE.Group();
+
+        scene.add(circle);
+        scene.add(particle);
+
+        var starGeom = new THREE.TetrahedronGeometry(2, 0);
+        // var starGeom = new THREE.OctahedronGeometry(2, 0);
+        var planetGeom = new THREE.IcosahedronGeometry(7, 1);
+        var orbitalGeom = new THREE.IcosahedronGeometry(15, 1);
+
+        // Stars positioning
+        // for loop for number of stars, change to be number of poems in db.
+        for (var i = 0; i < 800; i++) {
+          const color = new THREE.Color(1, Math.random(), Math.random());
+          var mesh = new THREE.Mesh(starGeom, starMaterial);
+          let scaleVal = getRandomArbitrary(0.5, 3.0);
+
+          //Material Mesh Init
+          // MeshPhongMaterial
+          var starMaterial = new THREE.MeshLambertMaterial({
+            color: 0xffffff,
+            emissive: color,
+            flatShading: true,
+            emissiveIntensity: 0.4,
+            // emissiveIntensity: Math.random(),
+            // vertexColors: true,
+          });
+
+          // Set position of mesh on xyz planes between -0.5 and 0.5
+          mesh.position
+            .set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5)
+            .normalize();
+
+          // set position scale of mesh by multiplying just defined position by a scalar
+          // scalar calculated as 300 + random float between 0 and 1 * scale value
+          // 300 represents the deadzone where no stars will spawn. as planet radius is 7*25= 175, no stars should spawn before at least 175. 300 is stylistic
+          mesh.position.multiplyScalar(300 + Math.random() * 600);
+          mesh.rotation.set(
+            Math.random() * 2,
+            Math.random() * 2,
+            Math.random() * 2
+          );
+          // Set size of mesh by adjusting the mesh's scale by a random number between 0.5 and 3
+          mesh.scale.set(scaleVal, scaleVal, scaleVal);
+
+          // Add Mesh to 3js Object3D object
+          particle.add(mesh);
+        }
+
+        var planetMaterial = new THREE.MeshPhongMaterial({
+          color: 0x00dbe3,
+          flatShading: true,
+        });
+
+        var orbitalMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          wireframe: true,
+          // side: THREE.DoubleSide,
+        });
+
+        // Planet Geometry
+        var planet = new THREE.Mesh(planetGeom, planetMaterial);
+        planet.scale.x = planet.scale.y = planet.scale.z = 25;
+
+        let continents = [];
+        let continentClr = [
+          0x00d103,
+          0x007502,
+          0xe6de77,
+          0xd4fdff,
+          0x1da608,
+          0x16823c,
+        ];
+        for (var i = 0; i < 35; i++) {
+          let scale = getRandomArbitrary(19, 20);
+          let offset;
+          let clr = Math.floor(getRandomArbitrary(0, 5));
+          let landmassMat = new THREE.MeshPhongMaterial({
+            color: continentClr[clr],
+            flatShading: true,
+          });
+          continents[i] = new THREE.Mesh(planetGeom, landmassMat);
+          continents[i].scale.x = continents[i].scale.y = continents[
+            i
+          ].scale.z = scale;
+          continents[i].position
+            .set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5)
+            .normalize();
+
+          continents[i].position.multiplyScalar(Math.floor(Math.random() * 50));
+          circle.add(continents[i]);
+        }
+
+        circle.add(planet);
+
+        var ambientLight = new THREE.AmbientLight(0xffffff);
+        // scene.add(ambientLight);
+
+        var lights = [];
+        // red Light rhs
+        // lights[0] = new THREE.DirectionalLight(0xbd1542, 1);
+        lights[0] = new THREE.DirectionalLight(0xffffff, 0.5);
+        lights[0].position.set(1, 0, 0);
+
+        // Green Light top down
+        lights[1] = new THREE.DirectionalLight(0xffffff, 0.7);
+        // lights[1] = new THREE.DirectionalLight(0x11e8bb, 1);
+        lights[1].position.set(0.75, 1, 0.5);
+
+        // pink light bottom up
+        lights[2] = new THREE.DirectionalLight(0xffc60a, 0.25);
+        // lights[2] = new THREE.DirectionalLight(0x8200c9, 0.5);
+        lights[2].position.set(-0.75, -1, 0.5);
+        scene.add(lights[0]);
+        scene.add(lights[1]);
+        scene.add(lights[2]);
+
+        // document setup
+
+        raycaster = new THREE.Raycaster();
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        // renderer.setPixelRatio(
+        //   window.devicePixelRatio ? window.devicePixelRatio : 1
+        // );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.autoClear = false;
+        renderer.setClearColor(0x000000, 0.0);
+
+        // setup controls
+
+        // controls = new THREE.DeviceOrientationControls(
+        //   camera,
+        //   renderer.domElement
+        // );
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        // Prevent dollying into the planet or outside the render distance for the planet
+        controls.minDistance = 300;
+        controls.maxDistance = 1000;
+
+        document.getElementById("canvas").appendChild(renderer.domElement);
+
+        document.addEventListener("mousemove", onMouseMove, false);
+        window.addEventListener("resize", onWindowResize, false);
+      }
+
+      // recenter camera and renderer on resize
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function onMouseMove(event) {
+        event.preventDefault();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = (event.clientY / window.innerHeight) * 2 + 1;
+        // console.log(mouse.x);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        // raycaster.setFromCamera(mouse, camera);
+        particle.rotation.x += 0.0;
+        particle.rotation.y -= 0.0008;
+        circle.rotation.x -= 0.0012;
+        circle.rotation.y -= 0.0014;
+
+        render();
+      }
+
+      function render() {
+        // find intersections
+
+        // raycaster.setFromCamera(mouse, camera);
+
+        // var intersects = raycaster.intersectObjects(scene.children[2].children);
+        // console.log(intersects.length);
+
+        // if (intersects.length > 0) {
+        //   if (INTERSECTED != intersects[0].object) {
+        //     if (INTERSECTED)
+        //       // INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        //       INTERSECTED = intersects[0].object;
+        //     console.log("Intersected Object: ");
+        //     console.log(INTERSECTED);
+
+        //     // INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+        //     // INTERSECTED.material.emissive.setHex(0xff0000);
+        //   } else {
+        //     if (INTERSECTED)
+        //       // INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+        //       INTERSECTED = null;
+        //   }
+        // }
+        // renderer.clear();
+
+        controls.update();
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
