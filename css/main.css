@@ -157,14 +157,6 @@ canvas {
   max-height: 150px;
 }
 
-.navigation .hamburger:hover,
-.navigation .create:hover,
-.navigation .view:hover,
-.navigation .info:hover {
-  -webkit-animation: pulse 1s infinite;
-          animation: pulse 1s infinite;
-}
-
 .navigation .hamburger:active,
 .navigation .create:active,
 .navigation .view:active,
@@ -184,7 +176,7 @@ canvas {
   fill: rgba(0, 0, 0, 0.4);
 }
 
-@media screen and (orientation: portrait) and (min-width: 768px) {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
   .navigation .hamburger,
   .navigation .create,
   .navigation .view,
@@ -226,6 +218,13 @@ canvas {
     width: 7vh;
     height: 7vh;
   }
+  .navigation .hamburger:hover,
+  .navigation .create:hover,
+  .navigation .view:hover,
+  .navigation .info:hover {
+    -webkit-animation: pulse 1s infinite;
+            animation: pulse 1s infinite;
+  }
   .navigation .hamburger svg,
   .navigation .create svg,
   .navigation .view svg,
@@ -251,7 +250,7 @@ canvas {
   transition: all 0.2s ease-in;
 }
 
-@media screen and (orientation: portrait) and (min-width: 768px) {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
   .navigation .hamburger i {
     width: 6vw;
   }
@@ -319,7 +318,7 @@ canvas {
           transform: scale(0.85);
 }
 
-@media screen and (orientation: portrait) and (min-width: 768px) {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
   .navigation .create {
     left: -18vw;
   }
@@ -360,7 +359,7 @@ canvas {
           transform: translateY(-2.6vw) rotate(315deg);
 }
 
-@media screen and (orientation: portrait) and (min-width: 768px) {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
   .navigation.open .hamburger i:first-of-type {
     -webkit-transform: translateY(1.9vw) rotate(45deg);
             transform: translateY(1.9vw) rotate(45deg);
@@ -409,6 +408,176 @@ canvas {
     transition: opacity 0.1s ease;
     opacity: 1;
   }
+}
+
+.frosted-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  min-height: 80vh;
+  max-height: 100vh;
+  z-index: 5;
+  background: inherit;
+  border-radius: 10vw 10vw 0 0;
+  background-color: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+  -webkit-transform: translateY(105%);
+          transform: translateY(105%);
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.frosted-panel.open {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.frosted-panel .create-container,
+.frosted-panel .info-container,
+.frosted-panel .view-container {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 5% 5% 0 5%;
+}
+
+.frosted-panel .create-container .buttons,
+.frosted-panel .info-container .buttons,
+.frosted-panel .view-container .buttons {
+  width: 100%;
+  padding-bottom: 7vw;
+  justify-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.frosted-panel .create-container .buttons .return,
+.frosted-panel .info-container .buttons .return,
+.frosted-panel .view-container .buttons .return {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 15vw;
+  height: 15vw;
+  background-color: #ff8000;
+  border-radius: 50%;
+}
+
+.frosted-panel .create-container .buttons .return svg,
+.frosted-panel .info-container .buttons .return svg,
+.frosted-panel .view-container .buttons .return svg {
+  fill: #ffff00;
+  width: 8vw;
+  height: 6vh;
+}
+
+.frosted-panel .info-container {
+  text-align: center;
+  color: #0c062c;
+}
+
+.frosted-panel .info-container .bold {
+  font-weight: 400;
+}
+
+.frosted-panel .info-container p {
+  font-family: alda, serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: justify;
+  margin: 1vh 0 1vh 0;
+  font-size: 2.5em;
+  line-height: 1.5;
+}
+
+.frosted-panel .info-container h1 {
+  font-family: alda, serif;
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
+  margin: 20px;
+  margin-top: 0;
+  max-width: 40vw;
+  font-size: 2.8em;
+  line-height: 1.6;
+}
+
+.frosted-panel .info-container a {
+  text-decoration: none;
+  color: #5d6a86;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.frosted-panel .info-container a:after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  position: absolute;
+  bottom: -1px;
+  left: calc(50%);
+  border-radius: 50%;
+  background-color: #5d6a86;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.frosted-panel .info-container a:hover {
+  -webkit-filter: drop-shadow(0 0 0.8rem #d60084);
+          filter: drop-shadow(0 0 0.8rem #d60084);
+}
+
+.frosted-panel .info-container a:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.frosted-panel.create .create-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.frosted-panel.info .info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.frosted-panel.view .view-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 /*
