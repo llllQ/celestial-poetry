@@ -157,6 +157,14 @@ canvas {
   max-height: 150px;
 }
 
+.navigation .hamburger:hover,
+.navigation .create:hover,
+.navigation .view:hover,
+.navigation .info:hover {
+  -webkit-animation: pulse 1s infinite;
+          animation: pulse 1s infinite;
+}
+
 .navigation .hamburger:active,
 .navigation .create:active,
 .navigation .view:active,
@@ -354,12 +362,12 @@ canvas {
 
 @media screen and (orientation: portrait) and (min-width: 768px) {
   .navigation.open .hamburger i:first-of-type {
-    -webkit-transform: translateY(2vw) rotate(45deg);
-            transform: translateY(2vw) rotate(45deg);
+    -webkit-transform: translateY(1.9vw) rotate(45deg);
+            transform: translateY(1.9vw) rotate(45deg);
   }
   .navigation.open .hamburger i:last-of-type {
-    -webkit-transform: translateY(-2vw) rotate(315deg);
-            transform: translateY(-2vw) rotate(315deg);
+    -webkit-transform: translateY(-1.9vw) rotate(315deg);
+            transform: translateY(-1.9vw) rotate(315deg);
   }
 }
 
@@ -394,6 +402,12 @@ canvas {
             transform: scale(1);
     top: 0;
     right: 0;
+    opacity: 0.3;
+  }
+  .navigation .info:hover {
+    -webkit-transition: opacity 0.1s ease;
+    transition: opacity 0.1s ease;
+    opacity: 1;
   }
 }
 

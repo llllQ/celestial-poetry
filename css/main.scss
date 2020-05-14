@@ -134,9 +134,13 @@ canvas {
     border-radius: 50%;
     max-width: 150px;
     max-height: 150px;
+    &:hover {
+      animation: pulse 1s infinite;
+    }
     &:active {
       animation: pulse 1s 1;
     }
+
     svg {
       width: 10vw;
       max-width: 110px;
@@ -285,11 +289,11 @@ canvas {
 
         @media screen and (orientation: portrait) and (min-width: 768px) {
           &:first-of-type {
-            transform: translateY(2vw) rotate(45deg);
+            transform: translateY(1.9vw) rotate(45deg);
           }
 
           &:last-of-type {
-            transform: translateY(-2vw) rotate(315deg);
+            transform: translateY(-1.9vw) rotate(315deg);
           }
         }
 
@@ -325,6 +329,11 @@ canvas {
       transform: scale(1);
       top: 0;
       right: 0;
+      opacity: 0.3;
+      &:hover {
+        transition: opacity 0.1s ease;
+        opacity: 1;
+      }
     }
   }
 }
