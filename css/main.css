@@ -416,8 +416,9 @@ canvas {
   left: 0;
   right: 0;
   width: 100vw;
-  min-height: 80vh;
+  min-height: 60vh;
   max-height: 100vh;
+  color: #0c062c;
   z-index: 5;
   background: inherit;
   border-radius: 10vw 10vw 0 0;
@@ -450,7 +451,7 @@ canvas {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding: 5% 5% 0 5%;
+  padding: 5% 7% 0 7%;
 }
 
 .frosted-panel .create-container .buttons,
@@ -466,9 +467,9 @@ canvas {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -500,9 +501,18 @@ canvas {
   height: 6vh;
 }
 
-.frosted-panel .info-container {
-  text-align: center;
-  color: #0c062c;
+.frosted-panel .create-container .buttons .create-submit,
+.frosted-panel .info-container .buttons .create-submit,
+.frosted-panel .view-container .buttons .create-submit {
+  background-color: #24dce9;
+  -webkit-animation: pulse 1.5s infinite;
+          animation: pulse 1.5s infinite;
+}
+
+.frosted-panel .create-container .buttons .create-submit svg,
+.frosted-panel .info-container .buttons .create-submit svg,
+.frosted-panel .view-container .buttons .create-submit svg {
+  fill: white;
 }
 
 .frosted-panel .info-container .bold {
@@ -526,7 +536,6 @@ canvas {
   text-align: center;
   margin: 20px;
   margin-top: 0;
-  max-width: 40vw;
   font-size: 2.8em;
   line-height: 1.6;
 }
@@ -562,6 +571,135 @@ canvas {
   left: 0;
 }
 
+.frosted-panel .create-container {
+  color: #00087d;
+  width: 100%;
+  text-align: left;
+}
+
+.frosted-panel .create-container h1 {
+  font-family: alda, serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: center;
+  margin: 30px;
+  margin-top: 0;
+  font-size: 5em;
+  line-height: 1.6;
+}
+
+.frosted-panel .create-container .form-title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding-bottom: 15px;
+}
+
+.frosted-panel .create-container .form-title h2 {
+  font-family: alda, serif;
+  font-weight: 300;
+  font-style: normal;
+  text-align: center;
+  margin: 5px;
+  margin-top: 0;
+  font-size: 3em;
+  line-height: 1.2;
+  padding-right: 20px;
+}
+
+.frosted-panel .create-container .form-title svg {
+  height: 2.5em;
+  width: 2.5em;
+  padding: 0.25em;
+  border: 1px solid white;
+  border-radius: 50%;
+  fill: white;
+  cursor: pointer;
+}
+
+.frosted-panel .create-container .poem-text {
+  background-color: transparent;
+  font-family: alda, serif;
+  font-weight: 300;
+  font-style: normal;
+  width: 100%;
+  min-height: 60vw;
+  border: 2px solid rgba(0, 8, 125, 0.5);
+  border-radius: 1%;
+  margin-bottom: 10%;
+  padding: 10px;
+  line-height: 1.6;
+  font-size: 1.6em;
+}
+
+.frosted-panel .create-container .poem-text:active {
+  border-color: #00087d;
+}
+
+.frosted-panel .create-container .mood-select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6.5em;
+  margin-bottom: 10%;
+}
+
+.frosted-panel .create-container .mood-select .radio_item {
+  display: none;
+}
+
+.frosted-panel .create-container .mood-select .label_item {
+  opacity: 0.15;
+}
+
+.frosted-panel .create-container .mood-select .radio_item:checked + label {
+  opacity: 1;
+}
+
+.frosted-panel .create-container .mood-select .radio_item:checked + label:after {
+  width: 30%;
+  left: calc(50% - 15%);
+}
+
+.frosted-panel .create-container .mood-select label {
+  position: relative;
+  cursor: pointer;
+}
+
+.frosted-panel .create-container .mood-select label:after {
+  content: "";
+  width: 0%;
+  height: 3px;
+  position: absolute;
+  bottom: -5px;
+  left: calc(50%);
+  border-radius: 50%;
+  background-color: #ffff00;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
 .frosted-panel.create .create-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -580,125 +718,6 @@ canvas {
   display: flex;
 }
 
-/*
-.info-icon {
-  position: absolute;
-  width: 10vw;
-  height: 10vw;
-  max-width: 50px;
-  max-height: 50px;
-  z-index: 5;
-  top: 1vh;
-  right: 1vw;
-  opacity: 0.8;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.info-icon :hover {
-  opacity: 1;
-  filter: drop-shadow(0 0 0.8rem #d60084);
-}
-
- .info-icon svg {
-  fill: white;
-  transition: all 0.2s ease;
-} 
-
- .x-icon {
-  display: block;
-}
-
-.i-icon {
-  display: none;
-}
-
-.info-icon.closed .x-icon {
-  display: none;
-}
-
-.info-icon.closed .i-icon {
-  display: block;
-}
-
-.info-container {
-  transition: all 0.3s ease;
-  position: absolute;
-  z-index: 3;
-  background-color: #8a9dc5;
-  color: azure;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.97;
-}
-
-.info-container p {
-  font-family: alda, serif;
-  font-weight: 300;
-  font-style: normal;
-  text-align: center;
-  margin: 20px;
-  max-width: 30vw;
-  font-size: 1.2em;
-  line-height: 1.6;
-}
-
-.info-container h1 {
-  font-family: alda, serif;
-  font-weight: 700;
-  font-style: normal;
-  text-align: center;
-  margin: 20px;
-  margin-top: 0;
-  max-width: 40vw;
-  font-size: 2.8em;
-  line-height: 1.6;
-}
-
-.info-container a {
-  text-decoration: none;
-  color: #5d6a86;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.info-container a:after {
-  content: "";
-  width: 0%;
-  height: 2px;
-  position: absolute;
-  bottom: -1px;
-  left: calc(50%);
-  border-radius: 50%;
-  background-color: #5d6a86;
-  transition: all 0.2s ease;
-}
-
-.info-container a:hover {
-  filter: drop-shadow(0 0 0.8rem #d60084);
-}
-
-.info-container a:hover:after {
-  width: 100%;
-  left: 0;
-}
-
-.bold {
-  font-weight: 400;
-}
-
-.info-icon.closed ~ .info-container {
-  opacity: 0;
-  z-index: -2;
-} */
 @media screen and (max-width: 1400px) {
   /* .info-container p {
     max-width: 80vw;
