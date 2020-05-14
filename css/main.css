@@ -119,6 +119,20 @@ canvas {
   right: 7vw;
 }
 
+@media screen and (orientation: landscape) {
+  .navigation {
+    bottom: 7vh;
+    right: 7vh;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1367px) {
+  .navigation {
+    top: 5vh;
+    right: 5vh;
+  }
+}
+
 .navigation .hamburger,
 .navigation .create,
 .navigation .view,
@@ -143,6 +157,14 @@ canvas {
   max-height: 150px;
 }
 
+.navigation .hamburger:active,
+.navigation .create:active,
+.navigation .view:active,
+.navigation .info:active {
+  -webkit-animation: pulse 1s 1;
+          animation: pulse 1s 1;
+}
+
 .navigation .hamburger svg,
 .navigation .create svg,
 .navigation .view svg,
@@ -152,6 +174,57 @@ canvas {
   height: 8vw;
   max-height: 75px;
   fill: rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .navigation .hamburger,
+  .navigation .create,
+  .navigation .view,
+  .navigation .info {
+    width: 10vw;
+    height: 10vw;
+  }
+  .navigation .hamburger svg,
+  .navigation .create svg,
+  .navigation .view svg,
+  .navigation .info svg {
+    width: 8vw;
+    height: 6.5vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .navigation .hamburger,
+  .navigation .create,
+  .navigation .view,
+  .navigation .info {
+    width: 10vh;
+    height: 10vh;
+  }
+  .navigation .hamburger svg,
+  .navigation .create svg,
+  .navigation .view svg,
+  .navigation .info svg {
+    width: 5vh;
+    height: 4vh;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1365px) {
+  .navigation .hamburger,
+  .navigation .create,
+  .navigation .view,
+  .navigation .info {
+    width: 7vh;
+    height: 7vh;
+  }
+  .navigation .hamburger svg,
+  .navigation .create svg,
+  .navigation .view svg,
+  .navigation .info svg {
+    width: 5vh;
+    height: 4vh;
+  }
 }
 
 .navigation .hamburger {
@@ -170,22 +243,35 @@ canvas {
   transition: all 0.2s ease-in;
 }
 
-.navigation .hamburger:active {
-  content: "";
-  position: relative;
-  display: block;
-  -webkit-animation: pulse 1s 1;
-          animation: pulse 1s 1;
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .navigation .hamburger i {
+    width: 6vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .navigation .hamburger i {
+    width: 7vh;
+  }
 }
 
 .navigation .create,
 .navigation .view,
 .navigation .info {
   position: absolute;
+  -webkit-animation: none;
+          animation: none;
   -webkit-transform: scale(0);
           transform: scale(0);
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+}
+
+.navigation .create:active,
+.navigation .view:active,
+.navigation .info:active {
+  -webkit-animation: pulse 1s 1;
+          animation: pulse 1s 1;
 }
 
 .navigation .create {
@@ -225,6 +311,32 @@ canvas {
           transform: scale(0.85);
 }
 
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .navigation .create {
+    left: -18vw;
+  }
+  .navigation .view {
+    left: -12vw;
+    top: -12vw;
+  }
+  .navigation .info {
+    top: -18vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .navigation .create {
+    left: -20vh;
+  }
+  .navigation .view {
+    left: -13vh;
+    top: -13vh;
+  }
+  .navigation .info {
+    top: -20vh;
+  }
+}
+
 .navigation.open .hamburger i:first-of-type {
   -webkit-transform: translateY(2.6vw) rotate(45deg);
           transform: translateY(2.6vw) rotate(45deg);
@@ -240,11 +352,49 @@ canvas {
           transform: translateY(-2.6vw) rotate(315deg);
 }
 
+@media screen and (orientation: portrait) and (min-width: 768px) {
+  .navigation.open .hamburger i:first-of-type {
+    -webkit-transform: translateY(2vw) rotate(45deg);
+            transform: translateY(2vw) rotate(45deg);
+  }
+  .navigation.open .hamburger i:last-of-type {
+    -webkit-transform: translateY(-2vw) rotate(315deg);
+            transform: translateY(-2vw) rotate(315deg);
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .navigation.open .hamburger i:first-of-type {
+    -webkit-transform: translateY(2vh) rotate(45deg);
+            transform: translateY(2vh) rotate(45deg);
+  }
+  .navigation.open .hamburger i:last-of-type {
+    -webkit-transform: translateY(-2vh) rotate(315deg);
+            transform: translateY(-2vh) rotate(315deg);
+  }
+}
+
 .navigation.open .create,
 .navigation.open .view,
 .navigation.open .info {
   -webkit-transform: scale(1);
           transform: scale(1);
+}
+
+@media screen and (orientation: landscape) and (min-width: 1365px) {
+  .navigation .hamburger,
+  .navigation .create,
+  .navigation .view {
+    display: none;
+  }
+  .navigation .info {
+    -webkit-transition: none;
+    transition: none;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    top: 0;
+    right: 0;
+  }
 }
 
 /*
