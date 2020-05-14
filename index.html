@@ -7,6 +7,8 @@
     <title>Celestial Poetry</title>
     <link rel="stylesheet" href="https://use.typekit.net/rhq0hoi.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <div class="loading open">
@@ -67,7 +69,7 @@
           <circle class="cls-1" cx="130.13" cy="60.02" r="6.52" />
         </svg>
       </div>
-      <h1>loading</h1>
+      <h1>Stargazing...</h1>
     </div>
     <div id="canvas"></div>
     <div class="info-icon closed">
@@ -91,72 +93,56 @@
         />
       </svg>
     </div>
-    <div class="info-container">
-      <h1>
-        Celestial Poetry
-      </h1>
-      <p>
-        Conceived during the Coronavirus quarantine in 2020 and inspired by
-        <span class="bold"
-          ><a target="_blank" rel="noopener" href="https://paperplanes.world"
-            >paperplanes</a
-          ></span
-        >, we wanted to show that people can still connect and influence each
-        other despite us being socially distant. In this case through the
-        artform of poetry.
-      </p>
-      <p>
-        <!-- This project depicts a planet with hundreds of stars in its' orbit. Each
-        star represents a poem submitted by an anonymous user. A visitor to this
-        system can use their desktop device to see the contributions from afar,
-        but also navigate to this system on their phones to read and submit
-        individual stars using gestures. -->
-        This project is in its' early stages but we plan for it to depict a
-        planet with hundreds of stars in its' orbit. Each star will represents a
-        poem submitted by an anonymous user. A visitor to this system can use
-        their desktop device to see the wider picture of the contributions from
-        afar, but can also navigate to this system on their phones to read and
-        submit individual stars using gestures.
-      </p>
-      <p>
-        This was a chance for us to create something artistic using
-        <span class="bold"
-          ><a target="_blank" rel="noopener" href="https://threejs.org"
-            >three.js</a
-          ></span
+    <div class="navigation">
+      <div class="hamburger nav-icon">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20">
+          <path
+            d="M22,6H2A2,2,0,0,1,0,4H0A2,2,0,0,1,2,2H22a2,2,0,0,1,2,2h0A2,2,0,0,1,22,6Zm0,4H2a2,2,0,0,0-2,2H0a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2h0A2,2,0,0,0,22,10Zm0,8H2a2,2,0,0,0-2,2H0a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2h0A2,2,0,0,0,22,18Z"
+            transform="translate(0 -2)"
+          />
+        </svg> -->
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+      <div class="create nav-icon">
+        <?xml version="1.0" encoding="iso-8859-1"?>
+        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg
+          version="1.1"
+          id="Capa_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 512 512"
+          style="enable-background: new 0 0 512 512;"
+          xml:space="preserve"
         >
-        - a 3D JavaScript framework and Google's
-        <span class="bold">
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://firebase.google.com/products"
-            >Cloud Firestore</a
-          >
-        </span>
-        - a new realtime database system, new technologies to us during our time
-        unable to work in our professional careers.
-      </p>
-      <p>
-        Project conceived and created by
-        <span class="bold">
-          <a target="_blank" rel="noopener" href="https://mattpenlington.co.uk"
-            >Matt Penlington</a
-          >
-        </span>
-        and
-        <span class="bold">
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/SamKennard1"
-            >Sam Kennard</a
-          ></span
-        >
-        .
-      </p>
+          <g>
+            <path
+              d="M492,236H276V20c0-11.046-8.954-20-20-20c-11.046,0-20,8.954-20,20v216H20c-11.046,0-20,8.954-20,20s8.954,20,20,20h216
+			v216c0,11.046,8.954,20,20,20s20-8.954,20-20V276h216c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"
+            />
+          </g>
+        </svg>
+      </div>
+      <div class="view nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12.015 7c4.751 0 8.063 3.012 9.504 4.636-1.401 1.837-4.713 5.364-9.504 5.364-4.42 0-7.93-3.536-9.478-5.407 1.493-1.647 4.817-4.593 9.478-4.593zm0-2c-7.569 0-12.015 6.551-12.015 6.551s4.835 7.449 12.015 7.449c7.733 0 11.985-7.449 11.985-7.449s-4.291-6.551-11.985-6.551zm-.015 3c-2.21 0-4 1.791-4 4s1.79 4 4 4c2.209 0 4-1.791 4-4s-1.791-4-4-4zm-.004 3.999c-.564.564-1.479.564-2.044 0s-.565-1.48 0-2.044c.564-.564 1.479-.564 2.044 0s.565 1.479 0 2.044z"
+          />
+        </svg>
+      </div>
+      <div class="info nav-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5.45 12.18">
+          <path
+            d="M10,16c.56-1.79,1.63-3.93,1.82-4.47.27-.79-.21-1.14-1.74.2l-.34-.64c1.74-1.89,5.33-2.32,4.11.62-.76,1.83-1.31,3.07-1.62,4-.46,1.39.69.83,1.82-.21.15.25.2.33.36.62C11.88,18.53,9.1,18.74,10,16Zm4.74-8.17a1.3,1.3,0,0,1-1.76,0,1.14,1.14,0,0,1,.16-1.66,1.3,1.3,0,0,1,1.76,0A1.14,1.14,0,0,1,14.71,7.84Z"
+            transform="translate(-9.71 -5.83)"
+          />
+        </svg>
+      </div>
     </div>
-
     <script src="./scripts/open-info.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
