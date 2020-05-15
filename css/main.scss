@@ -331,11 +331,14 @@ canvas {
     }
 
     .info {
+      cursor: pointer;
       transition: none;
       transform: scale(1);
       top: 0;
       right: 0;
-      opacity: 0.3;
+      opacity: 0.25;
+      background-color: transparent;
+      border: 1px solid orange;
       &:hover {
         transition: opacity 0.15s ease-in-out;
         opacity: 1;

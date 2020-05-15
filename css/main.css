@@ -402,13 +402,16 @@ canvas {
     display: none;
   }
   .navigation .info {
+    cursor: pointer;
     -webkit-transition: none;
     transition: none;
     -webkit-transform: scale(1);
             transform: scale(1);
     top: 0;
     right: 0;
-    opacity: 0.3;
+    opacity: 0.25;
+    background-color: transparent;
+    border: 1px solid orange;
   }
   .navigation .info:hover {
     -webkit-transition: opacity 0.15s ease-in-out;
