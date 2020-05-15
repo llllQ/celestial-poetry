@@ -126,10 +126,17 @@ canvas {
   }
 }
 
-@media screen and (orientation: landscape) and (min-width: 1367px) {
+@media screen and (orientation: landscape) and (min-width: 1366px) {
   .navigation {
     top: 5vh;
     right: 5vh;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.5) {
+  .navigation {
+    bottom: 7vh;
+    right: 7vh;
   }
 }
 
@@ -404,8 +411,8 @@ canvas {
     opacity: 0.3;
   }
   .navigation .info:hover {
-    -webkit-transition: opacity 0.1s ease;
-    transition: opacity 0.1s ease;
+    -webkit-transition: opacity 0.15s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
     opacity: 1;
   }
 }
@@ -436,6 +443,12 @@ canvas {
           transform: translateY(0%);
 }
 
+@media screen and (orientation: landscape) and (min-width: 1600px) {
+  .frosted-panel {
+    min-height: 30vh;
+  }
+}
+
 .frosted-panel .create-container,
 .frosted-panel .info-container,
 .frosted-panel .view-container {
@@ -452,6 +465,42 @@ canvas {
           align-items: center;
   width: 100%;
   padding: 5% 7% 0 7%;
+}
+
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .create-container,
+  .frosted-panel .info-container,
+  .frosted-panel .view-container {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container,
+  .frosted-panel .info-container,
+  .frosted-panel .view-container {
+    padding-top: 2%;
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1365px) {
+  .frosted-panel .create-container,
+  .frosted-panel .info-container,
+  .frosted-panel .view-container {
+    padding: 5% 0 0 0;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1600px) {
+  .frosted-panel .create-container,
+  .frosted-panel .info-container,
+  .frosted-panel .view-container {
+    padding: 2vh 0 0 0;
+    width: 40%;
+  }
 }
 
 .frosted-panel .create-container .buttons,
@@ -473,6 +522,22 @@ canvas {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container .buttons,
+  .frosted-panel .info-container .buttons,
+  .frosted-panel .view-container .buttons {
+    padding-bottom: 7vh;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1600px) {
+  .frosted-panel .create-container .buttons,
+  .frosted-panel .info-container .buttons,
+  .frosted-panel .view-container .buttons {
+    padding-bottom: calc(2vh + 20px);
+  }
 }
 
 .frosted-panel .create-container .buttons .return,
@@ -501,6 +566,57 @@ canvas {
   height: 6vh;
 }
 
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .create-container .buttons .return,
+  .frosted-panel .info-container .buttons .return,
+  .frosted-panel .view-container .buttons .return {
+    width: 10vw;
+    height: 10vw;
+  }
+  .frosted-panel .create-container .buttons .return svg,
+  .frosted-panel .info-container .buttons .return svg,
+  .frosted-panel .view-container .buttons .return svg {
+    width: 8vw;
+    height: 6.5vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container .buttons .return,
+  .frosted-panel .info-container .buttons .return,
+  .frosted-panel .view-container .buttons .return {
+    width: 10vh;
+    height: 10vh;
+  }
+  .frosted-panel .create-container .buttons .return svg,
+  .frosted-panel .info-container .buttons .return svg,
+  .frosted-panel .view-container .buttons .return svg {
+    width: 5vh;
+    height: 4vh;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1365px) {
+  .frosted-panel .create-container .buttons .return,
+  .frosted-panel .info-container .buttons .return,
+  .frosted-panel .view-container .buttons .return {
+    width: 7vh;
+    height: 7vh;
+  }
+  .frosted-panel .create-container .buttons .return svg,
+  .frosted-panel .info-container .buttons .return svg,
+  .frosted-panel .view-container .buttons .return svg {
+    width: 5vh;
+    height: 4vh;
+  }
+}
+
+.frosted-panel .create-container .buttons .info-return,
+.frosted-panel .info-container .buttons .info-return,
+.frosted-panel .view-container .buttons .info-return {
+  justify-self: flex-end;
+}
+
 .frosted-panel .create-container .buttons .create-submit,
 .frosted-panel .info-container .buttons .create-submit,
 .frosted-panel .view-container .buttons .create-submit {
@@ -521,17 +637,28 @@ canvas {
 
 .frosted-panel .info-container p {
   font-family: alda, serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   text-align: justify;
   margin: 1vh 0 1vh 0;
   font-size: 2.5em;
   line-height: 1.5;
+  width: 100%;
+}
+
+.frosted-panel .info-container p:last-of-type {
+  margin-bottom: 2vh;
+}
+
+@media screen and (orientation: landscape) and (min-width: 1600px) {
+  .frosted-panel .info-container p:last-of-type {
+    margin-bottom: calc(2vh + 20px);
+  }
 }
 
 .frosted-panel .info-container h1 {
   font-family: alda, serif;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   text-align: center;
   margin: 20px;
@@ -571,10 +698,55 @@ canvas {
   left: 0;
 }
 
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .info-container p {
+    font-size: 1.4em;
+    line-height: 1.6;
+  }
+  .frosted-panel .info-container h1 {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .info-container p {
+    font-size: 1.2em;
+    line-height: 1.5;
+  }
+  .frosted-panel .info-container h1 {
+    font-size: 2em;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1365px) {
+  .frosted-panel .info-container h1 {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 1600px) {
+  .frosted-panel .info-container h1 {
+    margin-top: 20px;
+  }
+}
+
 .frosted-panel .create-container {
   color: #00087d;
-  width: 100%;
   text-align: left;
+}
+
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .create-container {
+    width: 70%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container {
+    padding-top: 2%;
+    width: 50%;
+  }
 }
 
 .frosted-panel .create-container h1 {
@@ -586,6 +758,18 @@ canvas {
   margin-top: 0;
   font-size: 5em;
   line-height: 1.6;
+}
+
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .create-container h1 {
+    font-size: 3em;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container h1 {
+    font-size: 2em;
+  }
 }
 
 .frosted-panel .create-container .form-title {
@@ -604,6 +788,10 @@ canvas {
       -ms-flex-pack: start;
           justify-content: flex-start;
   padding-bottom: 15px;
+}
+
+.frosted-panel .create-container .form-title:nth-of-type(even) {
+  padding-bottom: 0;
 }
 
 .frosted-panel .create-container .form-title h2 {
@@ -628,12 +816,36 @@ canvas {
   cursor: pointer;
 }
 
-.frosted-panel .create-container .poem-text {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .create-container .form-title h2 {
+    font-size: 1.8em;
+    padding-right: 10px;
+  }
+  .frosted-panel .create-container .form-title svg {
+    height: 1.2em;
+    width: 1.2em;
+    padding: 0.2em;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .create-container .form-title h2 {
+    font-size: 1.2em;
+    padding-right: 10px;
+  }
+  .frosted-panel .create-container .form-title svg {
+    height: 0.8em;
+    width: 0.8em;
+    padding: 0.1em;
+  }
+}
+
+.frosted-panel .poem-text {
   background-color: transparent;
   font-family: alda, serif;
   font-weight: 300;
   font-style: normal;
-  width: 100%;
+  width: 98%;
   min-height: 60vw;
   border: 2px solid rgba(0, 8, 125, 0.5);
   border-radius: 1%;
@@ -643,11 +855,33 @@ canvas {
   font-size: 1.6em;
 }
 
-.frosted-panel .create-container .poem-text:active {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .poem-text {
+    font-size: 1.2em;
+    min-height: 35vw;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .poem-text {
+    font-size: 1.2em;
+    min-height: 30vh;
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-height: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.5) {
+  .frosted-panel .poem-text {
+    min-height: 30vh;
+  }
+}
+
+.frosted-panel .poem-text:active {
   border-color: #00087d;
 }
 
-.frosted-panel .create-container .mood-select {
+.frosted-panel .mood-select {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -665,36 +899,49 @@ canvas {
   margin-bottom: 10%;
 }
 
-.frosted-panel .create-container .mood-select .radio_item {
+@media screen and (orientation: portrait) and (min-width: 1000px) {
+  .frosted-panel .mood-select {
+    font-size: 4em;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .frosted-panel .mood-select {
+    font-size: 3em;
+    margin-bottom: 30px;
+  }
+}
+
+.frosted-panel .mood-select .radio_item {
   display: none;
 }
 
-.frosted-panel .create-container .mood-select .label_item {
+.frosted-panel .mood-select .label_item {
   opacity: 0.15;
 }
 
-.frosted-panel .create-container .mood-select .radio_item:checked + label {
+.frosted-panel .mood-select .radio_item:checked + label {
   opacity: 1;
 }
 
-.frosted-panel .create-container .mood-select .radio_item:checked + label:after {
+.frosted-panel .mood-select .radio_item:checked + label:after {
   width: 30%;
   left: calc(50% - 15%);
 }
 
-.frosted-panel .create-container .mood-select label {
+.frosted-panel .mood-select label {
   position: relative;
   cursor: pointer;
 }
 
-.frosted-panel .create-container .mood-select label:after {
+.frosted-panel .mood-select label:after {
   content: "";
   width: 0%;
   height: 3px;
   position: absolute;
   bottom: -5px;
   left: calc(50%);
-  border-radius: 50%;
+  border-radius: 25%;
   background-color: #ffff00;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
